@@ -1,0 +1,6 @@
+ALTER TABLE profiles 
+ADD COLUMN onboarded BOOLEAN DEFAULT false,
+ADD COLUMN city TEXT,
+ADD COLUMN interests TEXT[] DEFAULT '{}',
+ADD COLUMN vibe TEXT,
+ADD COLUMN budget TEXT;
