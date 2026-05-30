@@ -6,15 +6,11 @@ import {
   LayoutDashboard, 
   MapPin, 
   BookOpen, 
-  ShieldCheck, 
   MessageSquare,
   Building2,
-  LogOut
 } from 'lucide-react'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -30,14 +26,6 @@ const navigation = [
 
 export default function Sidebar() {
   const pathname = usePathname()
-  const router = useRouter()
-  const supabase = createClient()
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    router.push('/login')
-    router.refresh()
-  }
 
   return (
     <div className="flex h-full w-64 flex-col bg-indigo-900 text-white">
@@ -71,19 +59,6 @@ export default function Sidebar() {
           )
         })}
       </nav>
-
-      <div className="border-t border-indigo-800 p-4">
-        <button
-          onClick={handleSignOut}
-          className="group flex w-full items-center rounded-md px-2 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-800 hover:text-white"
-        >
-          <LogOut
-            className="mr-3 h-5 w-5 flex-shrink-0 text-indigo-300 group-hover:text-white"
-            aria-hidden="true"
-          />
-          Sign Out
-        </button>
-      </div>
     </div>
   )
 }
